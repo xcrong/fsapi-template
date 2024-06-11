@@ -32,7 +32,9 @@ cd <project_name>
 # 建立环境
 rye sync 
 # 更新项目细节
-rye run project 
+rye run update
+# 重新编译项目脚本
+rye sync 
 ```
 
 ## 4. 进行项目开发

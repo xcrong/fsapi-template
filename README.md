@@ -31,6 +31,8 @@ cd <project_name>
 rye sync 
 # Update project details
 rye run project 
+# recompile the project scripts
+rye sync
 ```
 
 ## 4. Develop the project
