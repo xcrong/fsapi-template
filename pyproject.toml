@@ -1,0 +1,42 @@
+[project]
+name = "fsapi-template"
+version = "0.1.0"
+description = "A template for FastAPI project."
+authors = [{ name = "theocheng", email = "zlz_gty@foxmail.com" }]
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn>=0.30.1",
+    "pydantic-settings>=2.3.1",
+    "toml>=0.10.2",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+# the cmd must be a String
+# project scripts will be compiled into the executable file
+"unit" = "fsapi_template.tools:mk_unit"
+"update" = "fsapi_template.tools:update_project_details"
+"start" = "fsapi_template.__main__:main"
+
+
+[tool.rye.scripts]
+# the cmd can be a String or an array of args
+# rye scripts will not be compiled into the executable file
+"dev" = { cmd = "python -m fsapi_template", env = { "RELOAD" = "True", "LOG_LEVEL" = "debug" } }
+
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fsapi_template"]
