@@ -10,7 +10,7 @@ rye 作为项目管理工具，是必须的。你甚至可以不用安装 Python
 
 rye 不仅会进行自管理，还能为你管理项目需要用到的 Python 解释器。
 
-本文默认项目开发和部署的环境都是 Linux。 在 Linux 上安装 Python 环境非常简单： `curl -sSf https://rye.astral.sh/get | bash`。
+本文默认项目开发和部署的环境都是 Linux。 在 Linux 上安装 rye 非常简单： `curl -sSf https://rye.astral.sh/get | bash`。
 
 更多 rye 安装相关文档参见： [https://rye.astral.sh/guide/installation/#installing-rye](https://rye.astral.sh/guide/installation/#installing-rye)。
 

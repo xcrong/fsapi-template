@@ -10,7 +10,7 @@ Rye is a necessary project management tool. You don't even need to install Pytho
 
 Rye will manage itself and also manage the Python interpreter needed for the project.
 
-This document assumes that the development and deployment environments are Linux. Installing the Python environment on Linux is very simple: `curl -sSf https://rye.astral.sh/get | bash`.
+This document assumes that the development and deployment environments are Linux. Installing rye on Linux is very simple: `curl -sSf https://rye.astral.sh/get | bash`.
 
 For more rye installation documentation, see: [https://rye.astral.sh/guide/installation/#installing-rye](https://rye.astral.sh/guide/installation/#installing-rye).
 
