@@ -72,7 +72,7 @@ def update_project_details():
         encoding="utf8",
     ) as f:
         content = f.read()
-    content = content.replace(old_name, new_name)
+    content = content.replace(old_name.replace("-", "_"), new_name.replace("-", "_"))
     with open(
         os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
         "w",
