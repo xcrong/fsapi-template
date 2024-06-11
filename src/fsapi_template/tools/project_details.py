@@ -52,14 +52,28 @@ def update_project_details():
     new_name = input(f"Project Name (Default: {parent_dir_name}): ").strip()
     if new_name == "":
         new_name = parent_dir_name
-    pyproject: dict[str, Any] = replace_values(pyproject, old_name.replace("-", "_"), new_name)  # type: ignore
-    pyproject: dict[str, Any] = replace_values(pyproject, old_name.replace("_", "-"), new_name)  # type: ignore
+    pyproject: dict[str, Any] = replace_values(
+        pyproject, old_name.replace("-", "_"), new_name
+    )  # type: ignore
+    pyproject: dict[str, Any] = replace_values(
+        pyproject, old_name.replace("_", "-"), new_name
+    )  # type: ignore
+
+    # rename src/old_name to src/new_name
+    os.rename(os.path.join("src", old_name), os.path.join("src", new_name))
+
+    # substitute old_name to new_name in src/new_name/__main__.py
+    with open(os.path.join("src", new_name, "__main__.py"), "r", encoding="utf8") as f:
+        content = f.read()
+    content = content.replace(old_name, new_name)
+    with open(os.path.join("src", new_name, "__main__.py"), "w", encoding="utf8") as f:
+        f.write(content)
 
     description = input(
         f"Descripte Your Project (Defaule: {pyproject['project']['description']}): "
     ).strip()
-    if description == "":
-        pass
+    if description != "":
+        pyproject["project"]["description"] = description
 
     git_name, git_email = (get_git_config().name, get_git_config().email)
     author_name = input(f"Your name (Default: {git_name}: )").strip()
@@ -70,8 +84,8 @@ def update_project_details():
     if author_email == "":
         author_email = git_email
 
-    pyproject['project']["authors"][0]["name"] = author_name
-    pyproject['project']["authors"][0]["email"] = author_email
+    pyproject["project"]["authors"][0]["name"] = author_name
+    pyproject["project"]["authors"][0]["email"] = author_email
 
     try:
         with open(project_file, "w", encoding="utf8") as f:
