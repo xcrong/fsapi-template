@@ -75,6 +75,17 @@ systemctl --user stop <project_name>.service
 systemctl --user disable <project_name>.service
 ```
 
+## 6. Log Rotation
+
+Log rotation relies on the tool `logrotate`, please ensure it is installed on your system.
+
+First, use `rye run rotate` to generate the log rotation configuration file. At the end of the generated file, you will see a crontab task for executing log rotation in user space.
+
+```bash
+0 0 * * * /usr/sbin/logrotate /home/.../fsapi-template.conf
+```
+
+Please edit with `crontab -e` and add the task you see.
 
 # License
 [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](./LICENSE)

@@ -21,6 +21,7 @@ build-backend = "hatchling.build"
 # the cmd must be a String
 # project scripts will be compiled into the executable file
 "unit" = "fsapi_template.tools:mk_unit"
+"rotate" = "fsapi_template.tools:mk_rotate"
 "update" = "fsapi_template.tools:update_project_details"
 "start" = "fsapi_template.__main__:main"
 

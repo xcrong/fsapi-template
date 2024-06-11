@@ -79,6 +79,17 @@ systemctl --user stop <project_name>.service
 systemctl --user disable <project_name>.service
 ```
 
+## 6. 日志轮换
+
+日志轮换依赖 `logrotate` 这个工具，请保证你的系统已经安装。
+
+首先用 `rye run rotate` 生成日志轮换配置文件，在生成的末尾，你会看到一个 crontab 任务，用于在用户空间执行日志轮换。
+
+```bash
+0 0 * * * /usr/sbin/logrotate /home/.../fsapi-template.conf
+```
+
+请用 crontab -e 编辑， 把你看到的任务添加进行。
 
 # License
 [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](./LICENSE)

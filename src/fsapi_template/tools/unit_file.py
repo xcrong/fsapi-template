@@ -19,8 +19,10 @@ StandardError=inherit
 WantedBy=default.target
 """)
 
-    pwd = os.getcwd()
+    pwd: str = os.getcwd()
     home: str = os.path.expanduser("~")
+    # mkdir for log
+    os.makedirs(os.path.join(pwd, "cache"), exist_ok=True)
 
     with open("pyproject.toml", "r", encoding="utf8") as f:
         pyproject = toml.load(f)
@@ -43,7 +45,7 @@ WantedBy=default.target
         "description": description,
         "pwd": pwd,
         "cmd": cmd,
-        "log": f"/var/log/{pj_name}.log",
+        "log": os.path.join(pwd, "cache", f"{pj_name}.log"),
     }
 
     unit_file = unit_file_template.safe_substitute(config)
