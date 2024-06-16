@@ -5,7 +5,7 @@ import logging
 from typing import Literal
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-with open("pyproject.toml", "r") as f:
+with open("pyproject.toml", "r", encoding="utf-8") as f:
     pyproject = toml.load(f)
     pj_name: str = pyproject["project"]["name"]
 
@@ -31,11 +31,7 @@ class UvicornConfig(BaseSettings):
 
 
 class CustomLogger:
-    def __init__(
-        self,
-        name,
-        level=logging.DEBUG
-    ):
+    def __init__(self, name, level=logging.DEBUG):
         # 创建 logger
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.DEBUG)
