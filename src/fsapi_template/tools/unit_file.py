@@ -28,6 +28,7 @@ WantedBy=default.target
         pyproject = toml.load(f)
         pj_name = pyproject["project"]["name"]
     pj_name = pyproject["project"]["name"]
+    pj_description = pyproject["project"]["description"]
 
     cmd = input("ExecStart (Default: rye run start): ").strip()
     if not cmd:
@@ -35,9 +36,7 @@ WantedBy=default.target
     elif cmd.startswith("rye"):
         cmd = f"{home}/.rye/shims/{cmd}"
 
-    description = input(
-        "Description (Default: A template service for fastapi): "
-    ).strip()
+    description = input(f"Description (Default: {pj_description}): ").strip()
     if not description:
         description = "A template service for fastapi"
 
