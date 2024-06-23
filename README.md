@@ -59,6 +59,12 @@ To change the running port, you can redefine the `PORT` environment variable in 
 ```bash
 # Generate unit file <project_name>.service
 rye run unit 
+# If you use `rye run unit <name>`
+# You can specify to generate `<name>.service`
+# This is especially useful when multiple unit services are needed
+# For example, `rye run unit proxy`
+#              `rye run unit spider`
+
 # It is recommended to run the generated unit file at the --user level
 # It can be placed in the following four locations
 # /usr/lib/systemd/user: Lowest priority, will be overridden by higher priority units of the same name
@@ -83,11 +89,16 @@ Log rotation relies on the tool `logrotate`, please ensure it is installed on yo
 
 First, use `rye run rotate` to generate the log rotation configuration file. At the end of the generated file, you will see a crontab task for executing log rotation in user space.
 
+Generate log rotation files, and you can also specify the generated file name: `rye run rotate <name>` will generate `name.conf`.
+
 ```bash
 0 0 * * * /usr/sbin/logrotate /home/.../fsapi-template.conf
 ```
 
 Please edit with `crontab -e` and add the task you see.
+
+## 7. Others
+Before `git push`, it is best to run `rye lint && rye format` to improve and format any non-compliant parts of the code.
 
 # License
 [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](./LICENSE)

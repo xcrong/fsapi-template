@@ -63,6 +63,13 @@ rye run start
 ```bash
 # 生成单元文件 <project_name>.service
 rye run unit 
+# 如果用 rye run unit <name>
+# 可以指定生成 <name>.service
+# 这在需要多个单元服务时格外有用
+# 比如 rye run unit proxy
+#      rye run unit spider
+
+
 # 对于生成的单元文件建议在 --user 级别运行
 # 可以放在下列四个位置
 # /usr/lib/systemd/user：优先级最低，会被高优先级的同名 unit 覆盖
@@ -87,11 +94,16 @@ systemctl --user disable <project_name>.service
 
 首先用 `rye run rotate` 生成日志轮换配置文件，在生成的末尾，你会看到一个 crontab 任务，用于在用户空间执行日志轮换。
 
+生成日志轮换文件，也可以指定生成的文件名： `rye run rotate <name>` 将生成 `name.conf`。
+
 ```bash
 0 0 * * * /usr/sbin/logrotate /home/.../fsapi-template.conf
 ```
 
 请用 crontab -e 编辑， 把你看到的任务添加进行。
+
+## 7. 其它
+在 git push 之前，最好执行一下 `rye lint && rye format` 对代码中不符合规范的地方进行改进并格式化。
 
 # License
 [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](./LICENSE)
