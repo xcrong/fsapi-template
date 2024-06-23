@@ -20,11 +20,10 @@ build-backend = "hatchling.build"
 [project.scripts]
 # the cmd must be a String
 # project scripts will be compiled into the executable file
-"unit" = "fsapi_template.tools:mk_unit"
-"rotate" = "fsapi_template.tools:mk_rotate"
-"update" = "fsapi_template.tools:update_project_details"
+"unit" = "scripts:mk_unit"
+"rotate" = "scripts:mk_rotate"
+"update" = "scripts:update_project_details"
 "start" = "fsapi_template.__main__:main"
-
 
 [tool.rye.scripts]
 # the cmd can be a String or an array of args
@@ -40,7 +39,7 @@ dev-dependencies = []
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/fsapi_template"]
+packages = ["src/fsapi_template", "scripts"]
 
 [tool.ruff]
 fix = true
