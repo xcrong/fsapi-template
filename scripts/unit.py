@@ -6,37 +6,26 @@ from string import Template
 
 import toml
 
+unit_file_template = Template(
+    textwrap.dedent("""\
+    [Unit]
+    Description=$description
+    After=network.target
+
+    [Service]
+    WorkingDirectory=$pwd
+    ExecStart=$cmd
+    StandardOutput=append:$log
+    StandardError=inherit
+
+    [Install]
+    WantedBy=default.target
+    """)
+)
+
 
 def mk_unit():
     specific_name = sys.argv[1].strip() if len(sys.argv) == 2 else None
-
-    unit_file_template = Template(
-        textwrap.dedent("""\
-        [Unit]
-        Description=$description
-        After=network.target
-
-        [Service]
-        WorkingDirectory=$pwd
-        ExecStart=$cmd
-        StandardOutput=append:$log
-        StandardError=inherit
-
-        [Install]
-        WantedBy=default.target
-        """)
-    )
-
-    # mk cache dir for log, *.conf, *.service
-    # in case the user forgot to execute `rye run init`
-    pwd: str = os.getcwd()
-    os.makedirs(os.path.join(pwd, "cache"), exist_ok=True)
-
-    rye = (
-        subprocess.run("which rye", shell=True, capture_output=True)
-        .stdout.decode("utf-8")
-        .strip()
-    )
 
     with open("pyproject.toml", encoding="utf8") as f:
         pyproject = toml.load(f)
@@ -45,9 +34,24 @@ def mk_unit():
     pj_name = pyproject["project"]["name"]
     pj_description = pyproject["project"]["description"]
 
+    fname = pj_name if specific_name is None else specific_name
+
+    # mk cache dir for log, *.conf, *.service
+    # in case the user forgot to execute `rye run init`
+    pwd: str = os.getcwd()
+    cache_dir = os.path.join(pwd, "cache")
+    os.makedirs(cache_dir, exist_ok=True)
+
+    rye = (
+        subprocess.run("which rye", shell=True, capture_output=True)
+        .stdout.decode("utf-8")
+        .strip()
+    )
+
     cmd = input(
-        f"ExecStart (Default: rye run \
-            {'start' if specific_name is None else specific_name}): "
+        f"""ExecStart (Default: rye run {
+            'start' if specific_name is None else specific_name
+            }): """
     ).strip()
     if not cmd:
         cmd = f"{rye} run {specific_name}"
@@ -62,7 +66,7 @@ def mk_unit():
         "description": description,
         "pwd": pwd,
         "cmd": cmd,
-        "log": os.path.join(pwd, "cache", f"{pj_name}.log"),
+        "log": os.path.join(cache_dir, f"{pj_name}.log"),
     }
 
     unit_file = unit_file_template.safe_substitute(config)
@@ -71,8 +75,8 @@ def mk_unit():
 
     with open(
         os.path.join(
-            "cache",
-            f"{pj_name if specific_name is None else specific_name}.service",
+            cache_dir,
+            f"{fname}.service",
         ),
         "w",
         encoding="utf8",
