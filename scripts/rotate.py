@@ -1,10 +1,13 @@
 import os
+import sys
+import textwrap
 from string import Template
 
 import toml
 
 
 def mk_rotate():
+    specific_name = sys.argv[1].strip() if len(sys.argv) == 2 else None
     with open("pyproject.toml", encoding="utf8") as f:
         pyproject = toml.load(f)
         pj_name = pyproject["project"]["name"]
@@ -12,20 +15,23 @@ def mk_rotate():
     pwd = os.getcwd()
     whoami = os.environ.get("USER", "")
 
-    rotate_template = Template("""\
-$logfile {
-    daily
-    rotate 7
-    compress
-    missingok
-    notifempty
-    copytruncate
-    create 640 $whoami $whoami
-    su $whoami $whoami
-    postrotate
-        systemctl --user restart $name.service
-    endscript
-}""")
+    rotate_template = Template(
+        textwrap.dedent("""\
+            $logfile {
+                daily
+                rotate 7
+                compress
+                missingok
+                notifempty
+                copytruncate
+                create 640 $whoami $whoami
+                su $whoami $whoami
+                postrotate
+                    systemctl --user restart $name.service
+                endscript
+            }
+            """)
+    )
 
     config = {
         "logfile": os.path.join(pwd, "cache", f"{pj_name}.log"),
@@ -37,7 +43,11 @@ $logfile {
 
     print("\n", rotate_file)
 
-    with open(f"{pj_name}.conf", "w", encoding="utf8") as f:
+    with open(
+        f"{pj_name if specific_name is None else specific_name}.conf",
+        "w",
+        encoding="utf8",
+    ) as f:
         f.write(rotate_file)
 
     print(
