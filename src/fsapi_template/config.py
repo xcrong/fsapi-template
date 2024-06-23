@@ -1,8 +1,8 @@
+import logging
+from typing import Literal
+
 import click
 import toml
-import logging
-
-from typing import Literal
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 with open("pyproject.toml", "r", encoding="utf-8") as f:

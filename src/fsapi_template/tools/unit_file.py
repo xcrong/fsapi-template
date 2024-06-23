@@ -1,6 +1,7 @@
 import os
-import toml
 from string import Template
+
+import toml
 
 
 def mk_unit():
