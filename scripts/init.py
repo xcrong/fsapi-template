@@ -45,7 +45,7 @@ def replace_values(obj, old_value, new_value):
 
 
 def reinit_git_repo():
-    os.rmdir(".git")
+    os.system("rm -rf .git")
     os.system("git init")
     os.system("git branch -m main")
     os.system("git add .")
