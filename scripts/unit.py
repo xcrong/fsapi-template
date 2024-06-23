@@ -7,7 +7,7 @@ from string import Template
 import toml
 
 unit_file_template = Template(
-    textwrap.dedent("""\
+    textwrap.dedent("""
     [Unit]
     Description=$description
     After=network.target
@@ -54,7 +54,7 @@ def mk_unit():
             }): """
     ).strip()
     if not cmd:
-        cmd = f"{rye} run {specific_name}"
+        cmd = f"{rye} run start"
     elif cmd.startswith("rye"):
         cmd = f"{rye} {cmd.removeprefix('rye ')}"
 
