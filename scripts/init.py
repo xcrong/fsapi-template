@@ -44,6 +44,14 @@ def replace_values(obj, old_value, new_value):
         return obj
 
 
+def reinit_git_repo():
+    os.remove(".git")
+    os.system("git init")
+    os.system("git branch -m main")
+    os.system("git add .")
+    os.system('git commit -m "init"')
+
+
 def init_project_details():
     # mk cache dir for log, *.conf, *.service
     pwd: str = os.getcwd()
@@ -110,5 +118,10 @@ def init_project_details():
     try:
         with open(project_file, "w", encoding="utf8") as f:
             toml.dump(pyproject, f)
+    except Exception as e:
+        warnings.warn(str(e), stacklevel=2)
+
+    try:
+        reinit_git_repo()
     except Exception as e:
         warnings.warn(str(e), stacklevel=2)
