@@ -29,7 +29,7 @@ $logfile {
     config = {
         "logfile": os.path.join(pwd, "cache", f"{pj_name}.log"),
         "whoami": whoami,
-        "name": pj_name
+        "name": pj_name,
     }
 
     rotate_file = rotate_template.safe_substitute(config)
@@ -40,4 +40,5 @@ $logfile {
         f.write(rotate_file)
 
     print(
-        f"Please add this line to your crontab:\n0 0 * * * /usr/sbin/logrotate {os.path.join(pwd, pj_name + '.conf')}")
+        f"Please add this line to your crontab:\n0 0 * * * /usr/sbin/logrotate {os.path.join(pwd, pj_name + '.conf')}"
+    )

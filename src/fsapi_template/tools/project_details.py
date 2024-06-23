@@ -67,16 +67,16 @@ def update_project_details():
 
     # substitute old_name to new_name in src/new_name/__main__.py
     with open(
-            os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
-            "r",
-            encoding="utf8",
+        os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
+        "r",
+        encoding="utf8",
     ) as f:
         content = f.read()
     content = content.replace(old_name.replace("-", "_"), new_name.replace("-", "_"))
     with open(
-            os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
-            "w",
-            encoding="utf8",
+        os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
+        "w",
+        encoding="utf8",
     ) as f:
         f.write(content)
 
