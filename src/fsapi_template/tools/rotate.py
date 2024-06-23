@@ -5,7 +5,7 @@ import toml
 
 
 def mk_rotate():
-    with open("pyproject.toml", "r", encoding="utf8") as f:
+    with open("pyproject.toml", encoding="utf8") as f:
         pyproject = toml.load(f)
         pj_name = pyproject["project"]["name"]
 
@@ -41,5 +41,6 @@ $logfile {
         f.write(rotate_file)
 
     print(
-        f"Please add this line to your crontab:\n0 0 * * * /usr/sbin/logrotate {os.path.join(pwd, pj_name + '.conf')}"
+        f"Please add this line to your crontab:\
+        \n0 0 * * * /usr/sbin/logrotate {os.path.join(pwd, pj_name + '.conf')}"
     )

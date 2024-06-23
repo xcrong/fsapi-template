@@ -5,7 +5,7 @@ import click
 import toml
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-with open("pyproject.toml", "r", encoding="utf-8") as f:
+with open("pyproject.toml", encoding="utf-8") as f:
     pyproject = toml.load(f)
     pj_name: str = pyproject["project"]["name"]
 
@@ -23,9 +23,9 @@ class UvicornConfig(BaseSettings):
     reload: bool = False
     # if reload is True
     reload_includes: list[str] = ["**/*.py", ".envs"]
-    log_level: Literal["critical", "error", "warning", "info", "debug", "trace"] = (
-        "info"
-    )
+    log_level: Literal[
+        "critical", "error", "warning", "info", "debug", "trace"
+    ] = "info"
 
     model_config = SettingsConfigDict(env_file=".envs", extra="ignore")
 

@@ -25,7 +25,7 @@ WantedBy=default.target
     # mkdir for log
     os.makedirs(os.path.join(pwd, "cache"), exist_ok=True)
 
-    with open("pyproject.toml", "r", encoding="utf8") as f:
+    with open("pyproject.toml", encoding="utf8") as f:
         pyproject = toml.load(f)
         pj_name = pyproject["project"]["name"]
     pj_name = pyproject["project"]["name"]

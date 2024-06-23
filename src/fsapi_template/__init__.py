@@ -20,7 +20,9 @@ def main() -> int:
             port=uvicorn_config.port,
             reload=uvicorn_config.reload,
             reload_includes=(
-                uvicorn_config.reload_includes if uvicorn_config.reload else None
+                uvicorn_config.reload_includes
+                if uvicorn_config.reload
+                else None
             ),
             log_level=uvicorn_config.log_level,
         )

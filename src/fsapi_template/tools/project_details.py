@@ -33,7 +33,9 @@ def get_git_config() -> GitConfig:
 # 递归函数替换 JSON 数据中的特定字符串
 def replace_values(obj, old_value, new_value):
     if isinstance(obj, dict):
-        return {k: replace_values(v, old_value, new_value) for k, v in obj.items()}
+        return {
+            k: replace_values(v, old_value, new_value) for k, v in obj.items()
+        }
     elif isinstance(obj, list):
         return [replace_values(i, old_value, new_value) for i in obj]
     elif isinstance(obj, str):
@@ -44,7 +46,7 @@ def replace_values(obj, old_value, new_value):
 
 def update_project_details():
     project_file = "pyproject.toml"
-    with open(project_file, "r", encoding="utf8") as f:
+    with open(project_file, encoding="utf8") as f:
         pyproject = toml.load(f)
 
     parent_dir_name = os.path.basename(os.getcwd())
@@ -68,11 +70,12 @@ def update_project_details():
     # substitute old_name to new_name in src/new_name/__main__.py
     with open(
         os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
-        "r",
         encoding="utf8",
     ) as f:
         content = f.read()
-    content = content.replace(old_name.replace("-", "_"), new_name.replace("-", "_"))
+    content = content.replace(
+        old_name.replace("-", "_"), new_name.replace("-", "_")
+    )
     with open(
         os.path.join("src", new_name.replace("-", "_"), "__main__.py"),
         "w",
@@ -81,7 +84,8 @@ def update_project_details():
         f.write(content)
 
     description = input(
-        f"Descripte Your Project (Defaule: {pyproject['project']['description']}): "
+        f"Descripte Your Project \
+            (Defaule: {pyproject['project']['description']}): "
     ).strip()
     if description != "":
         pyproject["project"]["description"] = description
@@ -102,4 +106,4 @@ def update_project_details():
         with open(project_file, "w", encoding="utf8") as f:
             toml.dump(pyproject, f)
     except Exception as e:
-        warnings.warn(str(e))
+        warnings.warn(str(e), stacklevel=2)

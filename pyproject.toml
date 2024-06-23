@@ -41,3 +41,29 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/fsapi_template"]
+
+[tool.ruff]
+fix = true
+line-length = 80
+include = ["pyproject.toml", "src/**/*.py", "scripts/**/*.py"]
+
+[tool.ruff.format]
+# Use `\n` line endings for all files
+line-ending = "lf"
+
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
