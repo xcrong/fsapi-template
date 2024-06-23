@@ -25,7 +25,7 @@ $logfile {
         systemctl --user restart $name.service
     endscript
 }""")
-    
+
     config = {
         "logfile": os.path.join(pwd, "cache", f"{pj_name}.log"),
         "whoami": whoami,
@@ -38,6 +38,6 @@ $logfile {
 
     with open(f"{pj_name}.conf", "w", encoding="utf8") as f:
         f.write(rotate_file)
-    
 
-    print(f"Please add this line to your crontab:\n0 0 * * * /usr/sbin/logrotate {os.path.join(pwd, pj_name + '.conf')}")
+    print(
+        f"Please add this line to your crontab:\n0 0 * * * /usr/sbin/logrotate {os.path.join(pwd, pj_name + '.conf')}")

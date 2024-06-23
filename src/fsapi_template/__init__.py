@@ -4,7 +4,6 @@ from fastapi import FastAPI
 
 from .config import uvicorn_config, logger
 
-
 app = FastAPI()
 
 
