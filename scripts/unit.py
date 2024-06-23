@@ -27,8 +27,9 @@ def mk_unit():
         """)
     )
 
+    # mk cache dir for log, *.conf, *.service
+    # in case the user forgot to execute `rye run init`
     pwd: str = os.getcwd()
-    # mkdir for log
     os.makedirs(os.path.join(pwd, "cache"), exist_ok=True)
 
     rye = (
@@ -69,7 +70,10 @@ def mk_unit():
     print("\n", unit_file)
 
     with open(
-        f"{pj_name if specific_name is None else specific_name}.service",
+        os.path.join(
+            "cache",
+            f"{pj_name if specific_name is None else specific_name}.service",
+        ),
         "w",
         encoding="utf8",
     ) as f:

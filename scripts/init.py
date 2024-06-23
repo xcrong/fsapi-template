@@ -44,7 +44,11 @@ def replace_values(obj, old_value, new_value):
         return obj
 
 
-def update_project_details():
+def init_project_details():
+    # mk cache dir for log, *.conf, *.service
+    pwd: str = os.getcwd()
+    os.makedirs(os.path.join(pwd, "cache"), exist_ok=True)
+
     project_file = "pyproject.toml"
     with open(project_file, encoding="utf8") as f:
         pyproject = toml.load(f)

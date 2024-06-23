@@ -8,11 +8,16 @@ import toml
 
 def mk_rotate():
     specific_name = sys.argv[1].strip() if len(sys.argv) == 2 else None
+
+    # mk cache dir for log, *.conf, *.service
+    # in case the user forgot to execute `rye run init`
+    pwd = os.getcwd()
+    os.makedirs(os.path.join(pwd, "cache"), exist_ok=True)
+
     with open("pyproject.toml", encoding="utf8") as f:
         pyproject = toml.load(f)
         pj_name = pyproject["project"]["name"]
 
-    pwd = os.getcwd()
     whoami = os.environ.get("USER", "")
 
     rotate_template = Template(
@@ -44,7 +49,10 @@ def mk_rotate():
     print("\n", rotate_file)
 
     with open(
-        f"{pj_name if specific_name is None else specific_name}.conf",
+        os.path.join(
+            "cache",
+            f"{pj_name if specific_name is None else specific_name}.conf",
+        ),
         "w",
         encoding="utf8",
     ) as f:
