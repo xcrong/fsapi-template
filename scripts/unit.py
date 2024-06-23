@@ -54,7 +54,11 @@ def mk_unit():
             }): """
     ).strip()
     if not cmd:
-        cmd = f"{rye} run start"
+        cmd = (
+            f"{rye} run start"
+            if specific_name is None
+            else f"{rye} run {specific_name}"
+        )
     elif cmd.startswith("rye"):
         cmd = f"{rye} {cmd.removeprefix('rye ')}"
 
