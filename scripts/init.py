@@ -53,6 +53,8 @@ def init_project_details():
     with open(project_file, encoding="utf8") as f:
         pyproject = toml.load(f)
 
+    pj_description = pyproject["project"]["description"]
+
     parent_dir_name = os.path.basename(os.getcwd())
     old_name = pyproject["project"]["name"]
     new_name = input(f"Project Name (Default: {parent_dir_name}): ").strip()
@@ -88,8 +90,7 @@ def init_project_details():
         f.write(content)
 
     description = input(
-        f"Descripte Your Project \
-            (Defaule: {pyproject['project']['description']}): "
+        f"Descripte Your Project (Defaule: {pj_description}): "
     ).strip()
     if description != "":
         pyproject["project"]["description"] = description
