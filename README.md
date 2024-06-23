@@ -1,3 +1,5 @@
+[中文说明](./README_CN.md)
+
 # FastAPI Project Template
 
 A template repository for a FastAPI project that can automatically generate Unit files for easy project management using Systemd to start, restart, and stop the project.
@@ -29,8 +31,8 @@ cd <project_name>
 ```bash
 # Set up the environment
 rye sync 
-# Update project details
-rye run project 
+# Initialize the project using your own information
+rye run init
 # recompile the project scripts
 rye sync
 ```

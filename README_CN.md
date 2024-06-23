@@ -31,8 +31,8 @@ cd <project_name>
 ```bash
 # 建立环境
 rye sync 
-# 更新项目细节
-rye run update
+# 使用你自己的信息初始化项目
+rye run init
 # 重新编译项目脚本
 rye sync 
 ```
