@@ -60,6 +60,7 @@ To change the running port, you can redefine the `PORT` environment variable in 
 
 ```bash
 # Generate unit file <project_name>.service
+# into cache dir
 rye run unit 
 # If you use `rye run unit <name>`
 # You can specify to generate `<name>.service`
@@ -100,7 +101,7 @@ Generate log rotation files, and you can also specify the generated file name: `
 Please edit with `crontab -e` and add the task you see.
 
 ## 7. Others
-Before `git push`, it is best to run `rye lint && rye format` to improve and format any non-compliant parts of the code.
+Before `git push`, it is best to run `rye lint && rye fmt` to improve and format any non-compliant parts of the code.
 
 # License
 [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](./LICENSE)

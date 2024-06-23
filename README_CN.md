@@ -62,6 +62,7 @@ rye run start
 
 ```bash
 # 生成单元文件 <project_name>.service
+# 放在 cache 文件夹
 rye run unit 
 # 如果用 rye run unit <name>
 # 可以指定生成 <name>.service
@@ -103,7 +104,7 @@ systemctl --user disable <project_name>.service
 请用 crontab -e 编辑， 把你看到的任务添加进行。
 
 ## 7. 其它
-在 git push 之前，最好执行一下 `rye lint && rye format` 对代码中不符合规范的地方进行改进并格式化。
+在 git push 之前，最好执行一下 `rye lint && rye fmt` 对代码中不符合规范的地方进行改进并格式化。
 
 # License
 [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](./LICENSE)
