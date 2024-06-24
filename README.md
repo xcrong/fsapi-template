@@ -86,6 +86,21 @@ systemctl --user stop <project_name>.service
 systemctl --user disable <project_name>.service
 ```
 
+
+> Note:
+> Services started with `systemctl --user` will automatically stop when the user session ends (for example, logging out of the VPS). To keep the service running, you need to enable **linger** by executing `loginctl enable-linger $USER`. (This might require root privileges)
+>
+> If enabled successfully, running `loginctl show-user $USER | grep Linger` will show:
+>
+> ```shell
+> $ loginctl show-user $USER | grep Linger
+>  Linger=yes
+> ```
+>
+> For more information, see: 
+>   - https://docs.oracle.com/en/operating-systems/oracle-linux/8/obe-systemd-linger/#enable-processes-to-continue-b
+>   - https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances
+
 ## 6. Log Rotation
 
 Log rotation relies on the tool `logrotate`, please ensure it is installed on your system.

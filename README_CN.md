@@ -89,6 +89,20 @@ systemctl --user stop <project_name>.service
 systemctl --user disable <project_name>.service
 ```
 
+> 注意：
+> `systemctl --user` 启动的服务会在用户结束会话（比如退出 VPS ）时自动停止；要保持运行，需要启用 **linger**, 可以执行  `loginctl enable-linger $USER`。(可能需要 root 权限)
+>
+> 如果成功开启，执行 `loginctl show-user $USER | grep Linger` 会看到: 
+> 
+> ```shell
+> $ loginctl show-user $USER | grep Linger
+>  Linger=yes
+> ```
+>
+> 如果你想了解更多，参见： 
+>   - https://docs.oracle.com/en/operating-systems/oracle-linux/8/obe-systemd-linger/#enable-processes-to-continue-b
+>   - https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances
+
 ## 6. 日志轮换
 
 日志轮换依赖 `logrotate` 这个工具，请保证你的系统已经安装。
