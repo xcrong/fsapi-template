@@ -1,5 +1,7 @@
 [中文说明](./README_CN.md)
 
+![](https://codecov.io/github/xcrong/fsapi-template/branch/main/graph/badge.svg?token=tkq655ROg3)
+
 # FastAPI Project Template
 
 A template repository for a FastAPI project that can automatically generate Unit files for easy project management using Systemd to start, restart, and stop the project.

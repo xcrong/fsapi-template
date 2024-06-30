@@ -1,3 +1,5 @@
+![](https://codecov.io/github/xcrong/fsapi-template/branch/main/graph/badge.svg?token=tkq655ROg3)
+
 # FastAPI 项目模板
 
 一个 FastAPI 项目的模板仓库，可以自动生成 Unit 文件，方便用 Systemd 来启动、重启、停止项目。
