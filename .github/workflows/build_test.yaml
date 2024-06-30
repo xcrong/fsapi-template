@@ -1,0 +1,28 @@
+name: Build test and up result to Codecov
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install the latest version of rye
+        uses: eifinger/setup-rye@v3
+        with:
+            version: 'latest'
+      - name: Sync environment
+        run: rye sync
+      - name: Run tests and collect coverage
+        run: |
+            rye run coverage run -m pytest
+            rye run coverage combine
+            rye run coverage xml -i
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          verbose: true
+          file: ./coverage.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
