@@ -19,7 +19,6 @@ jobs:
       - name: Run tests and collect coverage
         run: |
             rye run coverage run -m pytest
-            rye run coverage combine
             rye run coverage xml -i
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
