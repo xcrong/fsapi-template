@@ -32,6 +32,8 @@ cd <project_name>
 
 ```bash
 # Set up the environment
+# In a production environment, you can add --no-dev to all sync commands
+# to reduce the installation of unnecessary dependencies
 rye sync 
 # Initialize the project using your own information
 rye run init

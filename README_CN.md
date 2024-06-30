@@ -32,6 +32,8 @@ cd <project_name>
 
 ```bash
 # 建立环境
+# 在生产环境中，可以在所有的 sync 后面添加 --no-dev
+# 以减少安装非必要依赖
 rye sync 
 # 使用你自己的信息初始化项目
 rye run init
