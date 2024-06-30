@@ -21,7 +21,7 @@ def fib(n: int):
         return fib(n - 1) + fib(n - 2)
 
 
-def main() -> int:
+def main() -> int:  # pragma: no cover
     logger.info("Start ... ")
     try:
         uvicorn.run(

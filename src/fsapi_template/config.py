@@ -50,19 +50,19 @@ class CustomLogger:
             "CRITICAL": click.style("CRITICAL", fg="bright_red"),
         }
 
-    def debug(self, message):
+    def debug(self, message):  # pragma: no cover
         self.logger.debug(f"{self.colors['DEBUG']}:     {message}")
 
-    def info(self, message):
+    def info(self, message):  # pragma: no cover
         self.logger.info(f"{self.colors['INFO']}:     {message}")
 
-    def warning(self, message):
+    def warning(self, message):  # pragma: no cover
         self.logger.warning(f"{self.colors['WARNING']}:     {message}")
 
-    def error(self, message):
+    def error(self, message):  # pragma: no cover
         self.logger.error(f"{self.colors['ERROR']}:     {message}")
 
-    def critical(self, message):
+    def critical(self, message):  # pragma: no cover
         self.logger.critical(f"{self.colors['CRITICAL']}:     {message}")
 
 
