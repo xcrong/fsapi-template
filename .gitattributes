@@ -1,0 +1,7 @@
+# 对所有文本文件自动处理换行符
+* text=auto
+
+# 强制特定文件类型使用 LF
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
